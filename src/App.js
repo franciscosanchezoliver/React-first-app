@@ -2,8 +2,8 @@ import React , {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import {todos} from './todos.json'
-console.log("hol" + todos);
+import {todos} from './todos.json';
+import TodoForm from './components/TodoForm';
 
 
 class App extends Component {
@@ -56,6 +56,8 @@ class App extends Component {
                   </span>
                 </a>
             </nav>
+
+            <TodoForm/>
 
             <div className="container">
               <div className="row mt-4">
