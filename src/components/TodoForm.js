@@ -11,17 +11,30 @@ class TodoForm extends Component {
             description: '',
             priority: 'low'
         };
+
+        this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInput(e){
-        console.log(e.target.value);
-    }
+        const {value, name} = e.target
+        this.setState({
+            [name]: value
+        });
+        console.log(this.state);
+    };
+
+    handleSubmit(e){
+        e.preventDefault(); // Evitar refrescar la pagina
+        this.props.onAddTodo(this.state);
+        alert("enviando...");
+    };
 
     render() {
         return (
             <div className="card">
 
-                <form className="card-body">
+                <form className="card-body" onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <input
                             type="text"
@@ -36,6 +49,7 @@ class TodoForm extends Component {
                         <input
                             type="text"
                             name="responsible"
+                            onChange={this.handleInput}
                             className="form-control"
                             placeholder="Responsible"
                         />
@@ -44,11 +58,25 @@ class TodoForm extends Component {
                     <div className="form-group">
                         <input
                             type="text"
-                            name="responsible"
+                            name="description"
+                            onChange={this.handleInput}
                             className="form-control"
                             placeholder="description"
                         />
                     </div>
+
+                    <div className="form-group">
+                        <select
+                            name="priority"
+                            onChange={this.handleInput}
+                            className="form-control">
+                            <option>low</option>
+                            <option>medium</option>
+                            <option>high</option>
+                        </select>
+                    </div>
+
+                    <input type="submit" value="Save" />
 
                 </form>
 
